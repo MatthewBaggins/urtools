@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from typing import Iterable
-from typing_extensions import TypeGuard
+import numpy as np
+from typing import Iterable, Union
+from typing_extensions import Literal, TypeGuard
 
 def is_str(x: object) -> TypeGuard[str]:
     return isinstance(x, str)
@@ -17,6 +18,8 @@ def is_iter_and_non_str(x: object) -> TypeGuard[Iterable]:
     """
     return not is_str(x) and is_iter(x)
 
+def is_non_val(x: object) -> TypeGuard[None]: # not entirely true because detects `nan`s as well
+    return (x is None) or (x != x) or (str(x).lower() == 'nan')
 
 # To restore in later versions (maybe?)
 # def issubtype(sub: type, 

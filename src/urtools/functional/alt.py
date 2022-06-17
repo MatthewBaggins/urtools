@@ -1,20 +1,26 @@
-from typing import Any, TypeVar
+from dataclasses import dataclass, field
+from typing import Any, Iterable, TypeVar, Optional
 
-def _is_valid_option(option: Any) -> bool:
-    if option is None or option != option:
-        return False
-    return True
+from urtools.type_tools import is_non_val
+
+@dataclass
+class NoValidAlternativesError(StopIteration):
+    options: Iterable
+    message: str = field(init=False)
+    def __post_init__(self) -> None:
+        self.message = f'None of the `options` passed to the `alt` function are valid and default was not provided nor allowed to be `None`\n{self.options = }'
 
 #TODO: overload return type depending on `allow_none_default`
+#TODO: test it
 T = TypeVar('T')
-def alt(*options: T | None, default: T | None = None, allow_none_default: bool = False) -> T | None:
+def alt(*options: Optional[T], 
+        default: Optional[T] = None, 
+        allow_none_default: bool = False) -> Optional[T]:
     for option in options:
-        if _is_valid_option(option):
-            assert option
+        if not is_non_val(option):
             return option
-    if _is_valid_option(default):
-        assert default
+    if not is_non_val(default):
         return default
     if allow_none_default:
         return None
-    raise StopIteration(f'None of the `options` given are valid and default was not `provided`: {options=}; {default=}')
+    raise NoValidAlternativesError(options)
