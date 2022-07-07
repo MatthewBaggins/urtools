@@ -1,0 +1,1 @@
+from urtools.metaprogramming.init_once import init_once
