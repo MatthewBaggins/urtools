@@ -1,11 +1,6 @@
-from __future__ import annotations
+from typing import List, Literal
 
-from typing import Literal
-
-def getfields(x: object) -> list[str]:
-    return [f for f in dir(x) if f[0].islower()]
-
-def showattrs(x: object, *, mode: Literal[0, 1, 2] = 0) -> list[str]:
+def showattrs(x: object, *, mode: Literal[0, 1, 2] = 0) -> List[str]:
     """Show attributes of `x`.
 
     Args

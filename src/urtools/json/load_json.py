@@ -1,12 +1,10 @@
-from __future__ import annotations
-
+#pylint:disable=missing-function-docstring
 import json
-from typing import Dict, Literal, overload, Type, TypeVar, Union
+from typing import List, Literal, Optional, overload, Type, Union
 
 JsonType = Union[Type[list], Type[dict]]
 JsonMode = Literal['r', 'w', 'x']
 
-# load
 @overload
 def load_json(path: str, json_type=dict) ->  dict: 
     ...
@@ -16,7 +14,7 @@ def load_json(path: str, json_type=list) ->  list:
     ... 
 
 def load_json(path: str, json_type: JsonType=dict, *, 
-              mode: JsonMode='r', encoding: Union[str, None] = 'utf-8') -> list | dict:
+              mode: JsonMode = 'r', encoding: Optional[str] = 'utf-8') -> Union[list, dict]:
     """Load the file into JSON in one line with context manager.
     """
     with open(path, mode, encoding=encoding) as f:
@@ -31,24 +29,7 @@ def load_dict(path: str) -> dict:
 def load_list(path: str) -> list:
     return load_json(path, list)
 
-def load_list_of_dicts(path: str) -> list[dict]:
+def load_list_of_dicts(path: str) -> List[dict]:
     loaded = load_list(path)
     assert all(isinstance(x, dict) for x in loaded)
     return loaded
-
-# dump
-def dump_json(obj: list | dict, path: str) -> None:
-    """Load data into a JSON file in one line with context manager.
-    """
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(obj, f)
-
-# utils
-V = TypeVar('V')
-def jsonKeys2int(x: Dict[str, V]) -> Dict[str | int, V]:
-    """A util to convert json objects' keys from strings to ints (where they should be ints)
-    """
-    if isinstance(x, dict):
-        assert all(str(k).isdigit() and float(k) == int(k) for k in x)
-        return {int(k): v for k, v in x.items()}
-    return x

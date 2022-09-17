@@ -1,6 +1,6 @@
 from enum import Enum
 
-def enum2tuple(enum: Enum, value_first=False):
+def enum2tuple(enum: Enum, *, value_first=False) -> tuple:
     """Convert an enum **object** to a tuple (value, name)
 
     Args

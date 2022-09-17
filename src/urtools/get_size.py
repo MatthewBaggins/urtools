@@ -1,3 +1,4 @@
+#pylint:disable=line-too-long
 # source: https://stackoverflow.com/questions/449560/how-do-i-determine-the-size-of-an-object-in-python 
 
 import inspect
