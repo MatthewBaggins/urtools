@@ -1,6 +1,8 @@
-from typing import List, Literal
+from __future__ import annotations
 
-def showattrs(x: object, *, mode: Literal[0, 1, 2] = 0) -> List[str]:
+from typing import Literal
+
+def showattrs(x: object, *, mode: Literal[0, 1, 2] = 0) -> list[str]:
     """Show attributes of `x`.
 
     Args

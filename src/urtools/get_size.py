@@ -32,4 +32,3 @@ def get_size(obj: object, seen=None) -> int:
         size += sum(get_size(getattr(obj, s), seen) for s in obj.__slots__ if hasattr(obj, s)) #type:ignore
     
     return size
-

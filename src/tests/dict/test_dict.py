@@ -5,7 +5,7 @@ LOGGER = logging.getLogger(__name__)
 import numpy as np
 import pytest
 
-from urtools.dict_tools.dict_nans import filter_dict_nans
+from urtools.dict.dict_nans import filter_dict_nans
 @pytest.mark.parametrize(('d', 'expected'),
                          (
                              ({1: None, 2: None, 3: np.nan}, {}),
@@ -45,7 +45,7 @@ class Test__dict_multindex_prep_keys:
 
 
 
-from urtools.dict_tools.index import dict_multindex
+from urtools.dict.index import dict_multindex
 class Test_dict_multindex:
     d_1 = {1: 1, 2: 2, 'key': 'KEY'}
     @pytest.mark.parametrize(('keys', 'expected'),
@@ -65,7 +65,7 @@ class Test_dict_multindex:
         result = dict_multindex(self.d_1, neg_keys=neg_keys)
         assert result == expected
 
-from urtools.dict_tools.index import dict_del_keys
+from urtools.dict.index import dict_del_keys
 class Test_dict_del_keys:
     d_1 = {1: 1, 2: 2, 'a': 'a', 'bb': 'bb'}
     @pytest.mark.parametrize(('del_keys', 'expected'),
@@ -77,7 +77,7 @@ class Test_dict_del_keys:
         res = dict_del_keys(self.d_1, del_keys)
         assert res == expected
     
-from urtools.dict_tools.index import dict_list_index
+from urtools.dict.index import dict_list_index
 class Test_dict_list_index:
     dl_1 = [{1: 2}, {1: 3}, {2: 2}]
     @pytest.mark.parametrize(('keys', 'expected'),
@@ -88,7 +88,7 @@ class Test_dict_list_index:
         result = dict_list_index(self.dl_1, keys)
         assert result == expected
 
-from urtools.dict_tools.index import dict_list_multindex
+from urtools.dict.index import dict_list_multindex
 class Test_dict_list_multindex:  
     dl_1 = [{1:1, 2:2, 3:3},
             {3:0, 4:4, 5:5}]
@@ -109,7 +109,7 @@ class Test_dict_list_multindex:
         LOGGER.info(f'{result=}')
         assert result == expected
     
-from urtools.dict_tools.is_subdict import is_subdict
+from urtools.dict.is_subdict import is_subdict
 class Test_is_subdict:
     @pytest.mark.parametrize(('sub_dict', 'sup_dict', 'expected'),
                              (({1:1}, {2:2, 1:1}, True),
@@ -122,7 +122,7 @@ class Test_is_subdict:
     def test(self, sub_dict, sup_dict, expected):
         assert is_subdict(sub_dict, sup_dict) == expected
 
-from urtools.dict_tools.join_dicts import join_dicts
+from urtools.dict.join_dicts import join_dicts
 class Test_join_dicts:
     d1 = {1:1, 2:2, 3:3}
     d2 = {2:2, 3:4, 10:0}    
@@ -135,7 +135,7 @@ class Test_join_dicts:
         assert join_dicts(*dicts) == expected
 
 #TODO: add sorting by custom keys and reversing?
-from urtools.dict_tools.sort_dict import sort_dict
+from urtools.dict.sort_dict import sort_dict
 class Test_sort_dict:
     d1 = {3:3, 1:2, 2:1}
     @pytest.mark.parametrize(('d', 'by', 'expected'),

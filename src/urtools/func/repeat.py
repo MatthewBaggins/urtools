@@ -6,7 +6,11 @@ from urtools.func.compose import assert_composable, compose, NonComposableFuncti
 
 P = ParamSpec('P')
 R = TypeVar('R')
+#TODO: rename?
+#TODO: test
 def repeat(func: Callable[P, R], n: int) -> Callable[P, R]:
+    """Apply `func` multiple times.
+    """
     if not assert_composable((func, func)):
         raise NonComposableFunctionPairError(func, func)
     @wraps(func)

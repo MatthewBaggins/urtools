@@ -1,4 +1,5 @@
-from typing import Callable, Iterable, List, Tuple, overload, TypeVar
+from __future__ import annotations
+from typing import Callable, Iterable, overload, TypeVar
 
 A = TypeVar("A")
 
@@ -6,11 +7,11 @@ A = TypeVar("A")
 def filter_(f: Callable[[str], bool], xs: str,
             /) -> str:...
 @overload
-def filter_(f: Callable[[A], bool], xs: List[A],
-            /) -> List[A]:...
+def filter_(f: Callable[[A], bool], xs: list[A],
+            /) -> list[A]:...
 @overload
-def filter_(f: Callable[[A], bool], xs: Tuple[A, ...],
-            /) -> Tuple[A, ...]:...
+def filter_(f: Callable[[A], bool], xs: tuple[A, ...],
+            /) -> tuple[A, ...]:...
 @overload
 def filter_(f: Callable[[A], bool], xs: Iterable[A],
             /) -> Iterable[A]:...

@@ -4,3 +4,4 @@ from urtools.func.mapfunctions import mapfunctions
 from urtools.func.repeat import repeat
 from urtools.func.map_ import map_
 from urtools.func.filter_ import filter_
+from urtools.func.flatten import flatten

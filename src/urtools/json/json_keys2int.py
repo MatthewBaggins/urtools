@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 from typing import Dict, TypeVar, Union
 
 V = TypeVar('V')
-def json_keys2int(x: Dict[str, V]) -> Dict[Union[str, int], V]:
+def json_keys2int(x: dict[str, V]) -> dict[Union[str, int], V]:
     """A util to convert json objects' keys from strings to ints (where they should be ints)
     """
     if isinstance(x, dict):
