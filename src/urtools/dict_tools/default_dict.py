@@ -1,7 +1,14 @@
+#pylint:disable=line-too-long,invalid-name,global-statement
 # source: https://stackoverflow.com/questions/6229073/how-to-make-a-dictionary-that-returns-key-for-keys-missing-from-the-dictionary-i
 
+_DEFAULT_DICT_ID = 0
+"""\
+Unique arbitrary identifier with which to uniquify the classname of the next
+:func:`DefaultDict`-derived type.
+"""
+
 def DefaultDict(keygen):
-    '''
+    """\
     Sane **default dictionary** (i.e., dictionary implicitly mapping a missing
     key to the value returned by a caller-defined callable passed both this
     dictionary and that key).
@@ -28,7 +35,7 @@ def DefaultDict(keygen):
     ----------
     MappingType
         Empty default dictionary creating missing keys via this callable.
-    '''
+    """
 
     # Global variable modified below.
     global _DEFAULT_DICT_ID
@@ -45,10 +52,3 @@ def DefaultDict(keygen):
 
     # Instantiate and return the first and only instance of this class.
     return default_dict_class()
-
-
-_DEFAULT_DICT_ID = 0
-'''
-Unique arbitrary identifier with which to uniquify the classname of the next
-:func:`DefaultDict`-derived type.
-'''

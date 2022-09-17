@@ -1,5 +1,5 @@
 from urtools.dict_tools import *
-from urtools.functional import *
+from urtools.func import *
 from urtools.list_tools import *
 
 from urtools.attr_tools import getfields, showattrs

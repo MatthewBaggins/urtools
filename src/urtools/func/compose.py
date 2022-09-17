@@ -6,7 +6,7 @@ from inspect import getfullargspec, isbuiltin, isclass
 from typing import Callable, Iterable, Type, TypeVar
 from typing_extensions import ParamSpec, TypeGuard
 
-from urtools.functional.is_lambda import is_lambda
+from urtools.func.is_lambda import is_lambda
 
 @dataclass
 class FunctionUnannotatedReturnError(Exception):

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from typing import Literal, overload, Type, TypeVar, Union
+from typing import Dict, Literal, overload, Type, TypeVar, Union
 
 JsonType = Union[Type[list], Type[dict]]
 JsonMode = Literal['r', 'w', 'x']
@@ -45,7 +45,7 @@ def dump_json(obj: list | dict, path: str) -> None:
 
 # utils
 V = TypeVar('V')
-def jsonKeys2int(x: dict[str, V]) -> dict[str | int, V]:
+def jsonKeys2int(x: Dict[str, V]) -> Dict[str | int, V]:
     """A util to convert json objects' keys from strings to ints (where they should be ints)
     """
     if isinstance(x, dict):

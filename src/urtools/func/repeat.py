@@ -2,7 +2,7 @@ from functools import wraps
 from typing import Callable, TypeVar
 from typing_extensions import ParamSpec
 
-from urtools.functional.compose import assert_composable, compose, NonComposableFunctionPairError
+from urtools.func.compose import assert_composable, compose, NonComposableFunctionPairError
 
 P = ParamSpec('P')
 R = TypeVar('R')

@@ -7,7 +7,7 @@ class ListDict(Dict[str, Any]):
     """A dictionary indexed by strings with values typecasted into lists by default.
     """
     
-    def update(self, other: dict[str, Any]) -> None:
+    def update(self, other: Dict[str, Any]) -> None:
         """If the key is already present and its value is a list, 
         either the new value `v` is added to that list 
         (if `v` is not a list) or the old list is extended with `v`
@@ -32,7 +32,7 @@ class DictDict(Dict[str, dict]):
     instead of lists or individual values.
     """
 
-    def update(self, other: dict[str, dict]) -> None:
+    def update(self, other: Dict[str, dict]) -> None:
         """If the key is taken, extend its dictionary.
         Otherwise, just "update yourself" with `other`. 
         """
@@ -52,7 +52,7 @@ class NatDict(Dict[int, Any]):
     """A dictionary indexed with natural numbers, with key clashes prevented by `assert`.
     """
     
-    def update(self, other: dict[int, Any]) -> None:
+    def update(self, other: Dict[int, Any]) -> None:
         assert all(k not in self.keys() for k in other), f"Key clashing in during attempted update!"
         assert all(isinstance(k, int) and k >= 0 for k in other), "Not all keys are natural numbers!"
         super().update(other)

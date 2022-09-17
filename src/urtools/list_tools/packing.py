@@ -3,7 +3,7 @@ import logging
 from typing import Iterable, TypeVar
 
 from urtools.list_tools.base import prune_list, reduce_list
-from urtools.functional import repeat
+from urtools.func import repeat
 from urtools.type_tools import is_iter_and_non_str
 
 def get_depth(x: object) -> int:
