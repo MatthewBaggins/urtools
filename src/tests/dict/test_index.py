@@ -2,18 +2,8 @@
 import logging
 LOGGER = logging.getLogger(__name__)
 
-import numpy as np
 import pytest
 
-from urtools.dict.dict_nans import filter_dict_nans
-@pytest.mark.parametrize(('d', 'expected'),
-                         (
-                             ({1: None, 2: None, 3: np.nan}, {}),
-                             ({2: None, 1: 2}, {1: 2})
-                            )
-                         )
-def test_filtered_as_expected(d: dict, expected: dict):
-    assert filter_dict_nans(d) == expected
 
 from urtools.dict.index import (_dict_multindex_prep_keys,
                                 DictInvalidKeyError,
@@ -109,44 +99,3 @@ class Test_dict_list_multindex:
         LOGGER.info(f'{result=}')
         assert result == expected
     
-from urtools.dict.is_subdict import is_subdict
-class Test_is_subdict:
-    @pytest.mark.parametrize(('sub_dict', 'sup_dict', 'expected'),
-                             (({1:1}, {2:2, 1:1}, True),
-                              ({}, {1:1}, True),
-                              ({1:1}, {}, False),
-                              ({}, {}, True),
-                              ({1:1}, {2:2}, False),
-                              ({1:1, 2:2}, {1:1, 0:0}, False),
-                              ({1:1}, {1:2, 2:2}, False)))
-    def test(self, sub_dict, sup_dict, expected):
-        assert is_subdict(sub_dict, sup_dict) == expected
-
-from urtools.dict.join_dicts import join_dicts
-class Test_join_dicts:
-    d1 = {1:1, 2:2, 3:3}
-    d2 = {2:2, 3:4, 10:0}    
-    @pytest.mark.parametrize(('dicts', 'expected'),
-                             (([d1, d2], {1:1,2:2,3:4,10:0}),
-                              ([d2, d1], {1:1,2:2,3:3,10:0}),
-                              ([{}, {}], {}),
-                              ([{}, {1:1}, {2:2}], {1:1,2:2})))
-    def test(self, dicts, expected):
-        assert join_dicts(*dicts) == expected
-
-#TODO: add sorting by custom keys and reversing?
-from urtools.dict.sort_dict import sort_dict
-class Test_sort_dict:
-    d1 = {3:3, 1:2, 2:1}
-    @pytest.mark.parametrize(('d', 'by', 'expected'),
-                             ((d1, 'key', {1:2, 2:1, 3:3}),
-                              (d1, 'k', {1:2, 2:1, 3:3}),
-                              (d1, 'value', {2:1, 1:2, 3:3}),
-                              (d1, 'v', {2:1, 1:2, 3:3}),
-                              ({}, 'k', {})))
-    def test(self, d, by, expected):
-        assert sort_dict(d, by) == expected
-
-    def test_value_error(self):
-        with pytest.raises(ValueError):
-            sort_dict({}, by='x') #type:ignore
