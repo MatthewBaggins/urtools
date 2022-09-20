@@ -22,15 +22,37 @@ def flatten(xs: Iterable[set[T]]) -> set[T]:...
 @overload
 def flatten(xs: Iterable[Iterable[T]]) -> Iterable[T]:...
 
-
 def flatten(xs: Iterable[Iterable]) -> Iterable:
     """Flatten the container/`Iterable`, i.e. remove one dimension/level of nesting."""
+    if not issubclass(outer_type := type(xs), Iterable):
+        raise OuterNotSubclassOfIterableError(
+            f"The outer type {outer_type} is not a subclass of Iterable")
+    if outer_type == str:
+        raise OuterTypeIsStrError("The outer type is `string`.")
     if not xs:
         return xs
     type_count = Counter(type(x) for x in xs)
-    assert len(type_count) == 1 and isinstance((xs_type := list(type_count)[0]), Iterable)
-    if issubclass(xs_type, dict):
+    if len(type_count) != 1:
+        raise MoreThanOneTypeError(
+            f"There is more than one type in the iterable.\n"
+            f"There are {len(type_count)} types: {list(type_count)}")
+    if not issubclass(inner_type := list(type_count)[0], Iterable):
+        raise InnerNotSubclassOfIterableError(
+            f"The inner type {inner_type} is not a subclass of Iterable")
+    if issubclass(inner_type, dict):
         return join_dicts(*cast(Iterable[dict], xs))
-    if xs_type is set:
+    if inner_type is set:
         return reduce(or_, xs)
     return reduce(add, xs)
+
+class OuterNotSubclassOfIterableError(TypeError):
+    """OuterNotSubclassOfIterableError"""
+
+class OuterTypeIsStrError(TypeError):
+    """OuterTypeIsStrError"""
+
+class MoreThanOneTypeError(TypeError):
+    """MoreThanOneTypeError"""
+
+class InnerNotSubclassOfIterableError(TypeError):
+    """InnerNotSubclassOfIterableError"""
