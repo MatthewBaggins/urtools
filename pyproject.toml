@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "urtools"
-version = "0.0.4a0"
+version = "0.0.4"
 description = "Custom functions and other utilities that I find useful and use across many projects."
 readme = "README.md"
 authors = [{ name = "MatthewBaggins", email = "bagginsmatthew@gmail.com"}]
@@ -21,7 +21,7 @@ classifiers = [
 keywords = ["utils"]
 dependencies = [
     "numpy",
-    "pandas",
+    "pandas>=1.5.3",
     "typing_extensions",
 ]
 requires-python = ">=3.8"
