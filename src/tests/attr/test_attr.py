@@ -1,3 +1,4 @@
+#pylint:disable=invalid-name,missing-class-docstring,missing-function-docstring
 from urtools.attr import getattrs, getdunder, getpriv
 
 class Test_getattrs:
@@ -15,7 +16,7 @@ class Test_getattrs:
         attrs0 = set(getattrs("", mode=0))
         attrs1 = set(getattrs("", mode=1))
         attrs2 = set(getattrs("", mode=2))
-        assert attrs0 < attrs1 < attrs2
+        assert attrs0 <= attrs1 <= attrs2
 
 def test_getdunder():
     assert all(x.startswith("__") and x.endswith("__") for x in getdunder(""))

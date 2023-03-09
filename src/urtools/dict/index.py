@@ -23,23 +23,33 @@ def dict_del_keys(d: dict[K, V], del_keys: Iterable[K]) -> dict[K, V]:
 
 @overload
 def dict_list_index(
-    dict_list: Iterable[dict[K, V]], key: K, *, allow_nones: Literal[False] = False
+    dict_list: Iterable[dict[K, V]],
+    key: K,
+    *,
+    missing: Literal["nones"],
 ) -> list[Optional[V]]:
     ...
 
 
 @overload
 def dict_list_index(
-    dict_list: Iterable[dict[K, V]], key: K, *, allow_nones: Literal[True] = True
+    dict_list: Iterable[dict[K, V]],
+    key: K,
+    *,
+    missing: Literal["skip", "error"] = "skip",
 ) -> list[V]:
     ...
 
 
 def dict_list_index(
-    dict_list: Iterable[dict[K, V]], key: K, *, allow_nones: bool = False
+    dict_list: Iterable[dict[K, V]],
+    key: K,
+    *,
+    missing: Literal["nones", "skip", "error"] = "skip",
 ) -> list[Optional[V]] | list[V]:
     """Take a list of dictionaries and index each one with the same key"""
-    if allow_nones:
+    if missing == "nones":
         return [d.get(key) for d in dict_list]
+    if missing == "skip":
+        return [d[key] for d in dict_list if key in d]
     return [d[key] for d in dict_list]
-

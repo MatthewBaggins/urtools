@@ -3,12 +3,13 @@
 import numpy as np
 import pytest
 
+from urtools.dict import filter_dict_nans
 
-from urtools.dict.dict_nans import filter_dict_nans
 @pytest.mark.parametrize(('d', 'expected'),
                          (
-                             ({1: None, 2: None, 3: np.nan}, {}),
-                             ({2: None, 1: 2}, {1: 2})
+                             ({1: 1, 2: 2, 3: np.nan}, {1: 1, 2: 2}),
+                             ({2: np.nan, 1: 2}, {1: 2}),
+                             ({1: np.nan, "1": np.nan}, {})
                             )
                          )
 def test_filtered_as_expected(d: dict, expected: dict):
