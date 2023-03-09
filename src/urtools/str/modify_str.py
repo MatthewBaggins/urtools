@@ -29,5 +29,6 @@ def modify_str(
     if end is None:
         end = start
     else:
-        assert 0 <= start <= end
+        assert 0 <= start <= end, f"start must fall between 0 and {end=} but {start=}"
+        assert end <= len(old_str), f"end must be smaller or equal than length of old_str but is {end=} whereas {len(old_str)=}"
     return old_str[:start] + new_substr + old_str[end:]
