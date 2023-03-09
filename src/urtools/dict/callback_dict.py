@@ -6,7 +6,7 @@ V = TypeVar("V")
 CallbackArgType = Union[Callable[[K], V], Callable[[], V], V, None]
 
 T = TypeVar("T")
-def identity(x: T, /) -> T:
+def _identity(x: T, /) -> T:
     """Identity function. Returns whatever it was given."""
     return x
 
@@ -19,7 +19,7 @@ class CallbackDict(dict, Generic[K, V]):
     
     def __init__(self, callback: CallbackArgType = None, /, **rest) -> None:
         if callback is None:
-            self.callback = cast(Callable[[K], V], identity)
+            self.callback = cast(Callable[[K], V], _identity)
         elif isinstance(callback, Callable):
             if (callback_n_args := len(getfullargspec(callback).args)) > 1:
                 raise AttributeError(

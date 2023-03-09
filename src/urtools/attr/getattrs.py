@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
-def showattrs(x: object, *, mode: Literal[0, 1, 2] = 0) -> list[str]:
-    """Show attributes of `x`.
+def getattrs(x: object, *, mode: Literal[0, 1, 2] = 0) -> list[str]:
+    """Show attributes of any object `x`.
 
     Args
     ----------
@@ -12,7 +12,7 @@ def showattrs(x: object, *, mode: Literal[0, 1, 2] = 0) -> list[str]:
 
     mode : Literal[0, 1, 2], default=0
         - 0 - Show only attributes that don't start with an underscore ('_')
-        - 1 - Show only attributes that don't start with an dunder / double underscore ('__')
+        - 1 - Show only attributes that don't start with a double underscore (dunder: '__')
         - 2 - Show all attributes, no filtering
     """
     

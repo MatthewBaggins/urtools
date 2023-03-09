@@ -1,2 +1,3 @@
-from urtools.attr.getfields import getfields
-from urtools.attr.showattrs import showattrs
+from urtools.attr.getattrs import getattrs
+from urtools.attr.getdunder import getdunder
+from urtools.attr.getpriv import getpriv

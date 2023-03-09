@@ -78,7 +78,7 @@ class Test_dict_list_index:
         result = dict_list_index(self.dl_1, keys)
         assert result == expected
 
-from urtools.dict.index import dict_list_multindex
+from urtools.dict.index import dict_list_multindex_tolist
 class Test_dict_list_multindex:  
     dl_1 = [{1:1, 2:2, 3:3},
             {3:0, 4:4, 5:5}]
@@ -87,7 +87,7 @@ class Test_dict_list_multindex:
                               (1, {1: [1, None]}),
                               ([], {})))
     def test_keys(self, keys, expected):
-        result = dict_list_multindex(self.dl_1, keys)
+        result = dict_list_multindex_tolist(self.dl_1, keys)
         assert result == expected
 
     @pytest.mark.parametrize(('neg_keys', 'expected'),
@@ -95,7 +95,7 @@ class Test_dict_list_multindex:
                               ([], {1: [1, None], 2: [2, None], 3: [3, 0], 4: [None, 4], 5: [None, 5]}),
                               ([2, 3], {1: [1, None], 4: [None, 4], 5: [None, 5]})))
     def test_neg_keys(self, neg_keys, expected):
-        result = dict_list_multindex(self.dl_1, neg_keys=neg_keys)
+        result = dict_list_multindex_tolist(self.dl_1, neg_keys=neg_keys)
         LOGGER.info(f'{result=}')
         assert result == expected
     
