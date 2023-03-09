@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Iterable, Literal, Optional, TypeVar, Union, overload
+from typing import List, Iterable, Literal, Optional, TypeVar, overload
 
 
 K = TypeVar("K")
@@ -37,7 +37,7 @@ def dict_list_index(
 
 def dict_list_index(
     dict_list: Iterable[dict[K, V]], key: K, *, allow_nones: bool = False
-) -> Union[list[Optional[V]], list[V]]:
+) -> list[Optional[V]] | list[V]:
     """Take a list of dictionaries and index each one with the same key"""
     if allow_nones:
         return [d.get(key) for d in dict_list]

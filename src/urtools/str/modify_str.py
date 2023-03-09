@@ -1,10 +1,10 @@
 from __future__ import annotations
 
+
 def modify_str(
-    old_str: str, new_substr: str, 
-    start: int, end: int | None = None
-    ) -> str:
-    """Modify a string by replacing a piece of it with a new substring 
+    old_str: str, new_substr: str, start: int, end: int | None = None
+) -> str:
+    """Modify a string by replacing a piece of it with a new substring
     or inserting a new substring.
 
     Args
@@ -22,12 +22,12 @@ def modify_str(
     Note
     ----------
     If `end` is `None` (default value), then `new_substr` is just inserted into
-    `old_str` at `start`-th position. If it is not `None`, then `new_substr` replaces 
-    the segment of `old_str` from `start` to `end`. 
+    `old_str` at `start`-th position. If it is not `None`, then `new_substr` replaces
+    the segment of `old_str` from `start` to `end`.
     """
 
     if end is None:
         end = start
     else:
-        assert start >= 0 and start <= end
+        assert 0 <= start <= end
     return old_str[:start] + new_substr + old_str[end:]
